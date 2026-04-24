@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Face3D — Subir Imagen{% endblock %}
+
+{% block content %}
+<section class="upload-section">
+    <div class="upload-card">
+        <h2 class="section-title">Reconstrucción 3D de Rostro</h2>
+        <p class="section-desc">
+            Sube una fotografía frontal de una persona para obtener:<br>
+            <strong>Normal Map · Malla 3D · Estimación de Pose</strong>
+        </p>
+
+        <div class="drop-zone" id="dropZone">
+            <div class="drop-icon">📷</div>
+            <p class="drop-text">Arrastra una imagen aquí</p>
+            <p class="drop-sub">o haz clic para seleccionar</p>
+            <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp" hidden>
+        </div>
+
+        <div class="preview-area" id="previewArea" style="display:none;">
+            <img id="previewImg" src="" alt="Vista previa">
+            <p id="previewName" class="file-name"></p>
+        </div>
+
+        <button class="btn-process" id="btnProcess" disabled>
+            <span id="btnText">Procesar Imagen</span>
+            <span id="btnSpinner" class="spinner" style="display:none;"></span>
+        </button>
+
+        <div class="status-msg" id="statusMsg"></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}

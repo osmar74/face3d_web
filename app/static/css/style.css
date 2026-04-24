@@ -1,0 +1,176 @@
+/* ── Variables de tema oscuro ───────────────────────────────────── */
+:root {
+    --bg-primary:    #0d0f14;
+    --bg-secondary:  #161921;
+    --bg-card:       #1c2030;
+    --bg-hover:      #242840;
+    --border:        #2e3350;
+    --border-light:  #3d4470;
+    --accent:        #5c7cff;
+    --accent-glow:   #5c7cff33;
+    --accent-green:  #3ecf8e;
+    --accent-amber:  #f59e0b;
+    --text-primary:  #e8eaf6;
+    --text-secondary:#9ba3c4;
+    --text-muted:    #5a6080;
+    --danger:        #ff5c5c;
+    --radius-md:     10px;
+    --radius-lg:     16px;
+    --transition:    0.2s ease;
+}
+
+/* ── Reset base ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header ──────────────────────────────────────────────────────── */
+.app-header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+}
+.header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.logo-icon { font-size: 24px; }
+.app-title  { font-size: 20px; font-weight: 600; color: var(--text-primary); }
+.app-title .accent { color: var(--accent); }
+.badge {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 99px;
+}
+
+/* ── Main ────────────────────────────────────────────────────────── */
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+/* ── Upload card ─────────────────────────────────────────────────── */
+.upload-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.section-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.section-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+.section-desc strong { color: var(--accent-green); }
+
+/* ── Drop zone ───────────────────────────────────────────────────── */
+.drop-zone {
+    border: 2px dashed var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+}
+.drop-zone:hover,
+.drop-zone.dragover {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+}
+.drop-icon  { font-size: 36px; margin-bottom: 10px; }
+.drop-text  { color: var(--text-primary); font-weight: 500; }
+.drop-sub   { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+
+/* ── Preview ─────────────────────────────────────────────────────── */
+.preview-area {
+    text-align: center;
+}
+.preview-area img {
+    max-height: 220px;
+    max-width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    object-fit: cover;
+}
+.file-name {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+/* ── Botón ───────────────────────────────────────────────────────── */
+.btn-process {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity var(--transition), transform var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.btn-process:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-process:not(:disabled):hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ── Spinner ─────────────────────────────────────────────────────── */
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Status ──────────────────────────────────────────────────────── */
+.status-msg {
+    font-size: 13px;
+    color: var(--accent-green);
+    min-height: 20px;
+    text-align: center;
+}
+.status-msg.error { color: var(--danger); }
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+.app-footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+}

@@ -1,0 +1,26 @@
+# Entorno virtual
+venvf/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Variables de entorno
+.env
+
+# Archivos generados
+uploads/
+outputs/
+models_weights/
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+desktop.ini 
