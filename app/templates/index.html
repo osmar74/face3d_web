@@ -6,15 +6,18 @@
     <div class="upload-card">
         <h2 class="section-title">Reconstrucción 3D de Rostro</h2>
         <p class="section-desc">
-            Sube una fotografía frontal de una persona para obtener:<br>
-            <strong>Normal Map · Malla 3D · Estimación de Pose</strong>
+            Sube una fotografía frontal para obtener:
+            <span class="tag">Normal Map</span>
+            <span class="tag">Malla 3D</span>
+            <span class="tag">Estimación de Pose</span>
         </p>
 
         <div class="drop-zone" id="dropZone">
             <div class="drop-icon">📷</div>
             <p class="drop-text">Arrastra una imagen aquí</p>
-            <p class="drop-sub">o haz clic para seleccionar</p>
-            <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp" hidden>
+            <p class="drop-sub">JPG · PNG · WEBP — máx. 16 MB</p>
+            <input type="file" id="fileInput"
+                   accept=".jpg,.jpeg,.png,.webp" hidden>
         </div>
 
         <div class="preview-area" id="previewArea" style="display:none;">
@@ -27,11 +30,102 @@
             <span id="btnSpinner" class="spinner" style="display:none;"></span>
         </button>
 
+        <div class="progress-wrap" id="progressWrap" style="display:none;">
+            <div class="progress-bar" id="progressBar"></div>
+            <span class="progress-label" id="progressLabel">Iniciando...</span>
+        </div>
+
         <div class="status-msg" id="statusMsg"></div>
+    </div>
+</section>
+
+<!-- Panel de resultados (oculto hasta procesar) -->
+<section class="results-section" id="resultsSection" style="display:none;">
+    <h2 class="section-title results-title">Resultados</h2>
+
+    <!-- Tabs de navegación -->
+    <div class="tabs" id="resultTabs">
+        <button class="tab active" data-tab="detection">Detección</button>
+        <button class="tab" data-tab="landmarks">Landmarks</button>
+        <button class="tab" data-tab="normalmap">Normal Map</button>
+        <button class="tab" data-tab="mesh3d">Malla 3D</button>
+        <button class="tab" data-tab="pose">Pose</button>
+    </div>
+
+    <!-- Detección -->
+    <div class="tab-panel active" id="tab-detection">
+        <div class="result-grid">
+            <div class="result-card">
+                <h3 class="card-title">Detección de Rostro</h3>
+                <img id="imgDetection" class="result-img" src="" alt="Detección">
+                <div class="metrics" id="metricsDetection"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Landmarks -->
+    <div class="tab-panel" id="tab-landmarks">
+        <div class="result-grid">
+            <div class="result-card">
+                <h3 class="card-title">468 Landmarks Faciales</h3>
+                <img id="imgLandmarks" class="result-img" src="" alt="Landmarks">
+                <div class="metrics" id="metricsLandmarks"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Normal Map -->
+    <div class="tab-panel" id="tab-normalmap">
+        <div class="result-grid two-col">
+            <div class="result-card">
+                <h3 class="card-title">Normal Map</h3>
+                <img id="imgNormalMap" class="result-img" src="" alt="Normal Map">
+            </div>
+            <div class="result-card">
+                <h3 class="card-title">Overlay</h3>
+                <img id="imgNormalOverlay" class="result-img" src="" alt="Overlay">
+            </div>
+        </div>
+    </div>
+
+    <!-- Mesh 3D -->
+    <div class="tab-panel" id="tab-mesh3d">
+        <div class="result-grid two-col">
+            <div class="result-card">
+                <h3 class="card-title">Nube de Puntos 3D</h3>
+                <img id="imgPointcloud" class="result-img"
+                     src="" alt="Nube de puntos">
+            </div>
+            <div class="result-card">
+                <h3 class="card-title">Visor 3D Interactivo</h3>
+                <canvas id="canvas3d" class="viewer3d"></canvas>
+                <p class="viewer-hint">
+                    Click + arrastrar para rotar · scroll para zoom
+                </p>
+                <div class="metrics" id="metricsMesh"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pose -->
+    <div class="tab-panel" id="tab-pose">
+        <div class="result-grid two-col">
+            <div class="result-card">
+                <h3 class="card-title">Ejes de Pose</h3>
+                <img id="imgPoseAxes" class="result-img" src="" alt="Pose Ejes">
+            </div>
+            <div class="result-card">
+                <h3 class="card-title">Elipses de Orientación</h3>
+                <img id="imgPoseEllipses" class="result-img"
+                     src="" alt="Pose Elipses">
+                <div class="metrics" id="metricsPose"></div>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+<script src="{{ url_for('static', filename='js/viewer3d.js') }}"></script>
 {% endblock %}
